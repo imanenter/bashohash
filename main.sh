@@ -65,7 +65,25 @@ installations() {
   sudo apt -y install binutils make automake autoconf libtool btop
   sleep 0.5
   echo "$(tput setaf 2)----- Installing Soga.$(tput sgr0)"
-  bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/soga/master/install.sh)
+
+
+
+  install_command="bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/soga/master/install.sh)"
+
+# Check if the application is already installed
+  if ! command -v soga >/dev/null 2>&1; then
+      echo "Installing app..."
+    
+    # Install the application
+      eval "$install_command"
+
+      echo "$(tput setaf 2)----- Soga has been installed.$(tput sgr0)"
+  else
+      echo "$(tput setaf 2)----- Soga Was already installed.$(tput sgr0)"
+  fi
+
+
+
   sleep 1
   echo 
   echo "$(tput setaf 2)----- Useful Packages Installed Succesfully.$(tput sgr0)"
